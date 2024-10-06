@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>background image</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Deep space background */
+      font-family: 'Arial', sans-serif;
+      color: white;
+      background-image: url('https://www.nasa.gov/wp-content/uploads/2021/12/helio_teams_bkgrd_5_3.jpg');
+    background-size: cover; /* Ensures the background image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+
+    /* Brightened title */
+    h1 {
+  color: white; /* Bright neon green */
+  text-align: center; /* Centers the text horizontally */
+  margin-top: 20px; /* 20px from the top */
+  font-size: 3em;
+  position: relative; /* Use relative positioning to control its placement */
+}
+h2 {
+  color: white; /* Bright neon green */
+  text-align: center; /* Centers the text horizontally */
+  margin-top: 50px; /* 20px from the top */
+  font-size: 2em;
+  position: relative; /* Use relative positioning to control its placement */
+
+}
+h3 {
+  color: white; /* Bright neon green */
+  text-align: center; /* Centers the text horizontally */
+  margin-top: 30px; /* 20px from the top */
+  font-size: 2em;
+  position: relative; /* Use relative positioning to control its placement */
+}
+h5 {
+  color: white; /* Bright neon green */
+  text-align: center; /* Centers the text horizontally */
+  margin-top: 2px; /* 20px from the top */
+  position: relative; /* Use relative positioning to control its placement */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+    /* Cosmic container */
+    .cosmic-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Star styles */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background-color: #ffffff;
+      opacity: 0.7;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    /* Shooting star styles */
+    .shooting-star {
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, white, transparent);
+      animation: shoot 1s linear;
+    }
+
+    /* Twinkle animation */
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Shooting star animation */
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(500px) translateY(-300px);
+        opacity: 0;
+      }
+    }
+    /*th,tr{
+            border: 1px solid white;
+            background-color: black;
+            
+        }
+        a{
+            color: chartreuse;
+        }
+        table{
+            width: 100%;
+            height: 50px;
+            border-collapse: collapse;
+        }*/
+        .button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    justify-content: center; /* Centers the buttons horizontally */
+  }
+
+.homepage-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.homepage-btn:hover {
+    background-color: #45a049;
+}
+  </style>
+</head>
+<body>
+
+    <div><h1> Nasa Space App Challenge 2024</h1></div>
+    
+    <h2> CHALLENGE:</h2>
+<h3>  SHOW US WHAT THE MAY 2024 GEOMAGNETIC STORMS LOOKED LIKE </h3>
+ <h5> "The Hidden Forces Behind Auroras and Cosmic Energy"</h5>
+  
+
+    <div class="button-container">
+        <button class="homepage-btn" onclick="window.location.href='webpage1.html'">GEOSTORM</button>
+        <button class="homepage-btn" onclick="window.location.href='webpage2.html'">VIIRS</button>
+        <button class="homepage-btn" onclick="window.location.href='webpage5.html'">IMPACTS(VIDEO) </button>
+        <button class="homepage-btn" onclick="window.location.href='webpage3.html'">SOLARFLARES</button>
+        <button class="homepage-btn" onclick="window.location.href='webpage4.html'">HOW GMS LOOK LIKE</button>
+    </div>
+    <!--<img src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_256_0304.jpg" alt="Geomagnetic Storm" class="hello">-->
+
+  <div class="cosmic-container" id="cosmicContainer"></div>
+
+  <script>
+  const cosmicContainer = document.getElementById('cosmicContainer');
+
+  // Function to create stars
+  function createStar() {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = star.style.height = Math.random() * 3 + 'px';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+    cosmicContainer.appendChild(star);
+  }
+
+  // Function to create shooting stars
+  function createShootingStar() {
+    const shootingStar = document.createElement('div');
+    shootingStar.className = 'shooting-star';
+    
+    // Random size for the shooting star to make them look varied
+    shootingStar.style.width = Math.random() * 5 + 30 + 'px'; 
+    shootingStar.style.height = Math.random() * 2 + 1 + 'px'; 
+    
+    shootingStar.style.top = Math.random() * 50 + 'vh';
+    shootingStar.style.left = Math.random() * 100 + 'vw';
+    cosmicContainer.appendChild(shootingStar);
+    
+    // Remove the shooting star after the animation completes
+    setTimeout(() => shootingStar.remove(), 1000);
+  }
+
+  // Generate stars
+  for (let i = 0; i < 100; i++) {
+    createStar();
+  }
+
+  // Increase the frequency of shooting stars to create a busy night sky effect
+  setInterval(() => {
+    // Create multiple shooting stars at the same time
+    for (let i = 0; i < Math.random() * 5 + 2; i++) {
+      createShootingStar();
+    }
+  }, 500); // Reduced interval for more frequent shooting stars
+
+  </script>
+</body>
+</html>

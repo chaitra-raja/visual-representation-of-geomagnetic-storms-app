@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>first page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Deep space background */
+      font-family: 'Arial', sans-serif;
+      color: white;
+    }
+
+    /* Dimmed content container */
+    .content-container {
+      position: relative;
+      z-index: 5; /* Ensure it’s above the stars */
+      opacity: 0.85; /* Dimming effect */
+    }
+
+    /* Brightened title */
+    h1 {
+      color: blue;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 3em;
+    }
+
+    /* Cosmic container (stars, galaxies, etc.) */
+    .cosmic-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Stars behind the content */
+      overflow: hidden;
+    }
+
+    /* Star styles */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle 3s infinite alternate;
+      opacity: 0.1;
+    }
+
+    /* Shooting star styles */
+    .shooting-star {
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, white, transparent);
+      animation: shoot 1s linear;
+    }
+
+    /* Galaxy styles */
+    .galaxy {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0) 60%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      animation: drift 40s linear infinite;
+    }
+
+    /* Twinkle animation */
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Shooting star animation */
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(500px) translateY(-300px);
+        opacity: 0;
+      }
+    }
+
+    /* Distant galaxies animation */
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(150vw, -50vh);
+      }
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: white;
+      margin-left: 20px;
+      font-size: 1em;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Styling for the top-right image */
+    .top-right-img {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 300px;
+      height: auto;
+      margin-right: 150px;
+    }
+
+    /* Styling for the bottom-left image */
+    .bottom-left-img {
+      position: absolute;
+      bottom: 0px;
+      left: 150px;
+      width: 250px;
+      height: auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Cosmic container with stars in the background -->
+  <div class="cosmic-container" id="cosmicContainer"></div>
+
+  <!-- Content container with dimming applied -->
+  <div class="content-container">
+    <h1>Geomagnetic and G5 storms</h1>
+    <pre>     WHAT IS THE GEOMAGNETIC STORM?<br><br>
+                A geomagnetic storm is a major disturbance of<br>
+                Earth's magnetosphere that occurs when there is a<br>
+                very efficient exchange of energy from the solar<br>
+                wind into the space environment surrounding<br>
+                Earth.
+    </pre>
+    <pre> 
+                                                                WHAT IS G5 STORM?<br><br>
+                                                                    Geomagnetic storms are disturbances in the Earth's<br>
+                                                                    magnetosphere caused by solar wind activity. They are classified<br>
+                                                                    based on their strength, rated on a G scale from G1 (minor) to<br>
+                                                                    G5 (strongest). These storms are caused by Coronal Mass<br>
+                                                                    Ejections (CMEs) directed towards Earth.
+    </pre>
+
+    <!-- Image positioned at the top right -->
+    <img src="https://generated-assets.prod.myninja.ai/52527831-f322-4678-8bfa-7662908f7165/c58b8a4b-d27d-40c4-a65e-b9736d6116a0_0.jpeg" alt="Geomagnetic Storm" class="top-right-img">
+
+    <!-- Image positioned at the bottom left -->
+    <img src="https://generated-assets.prod.myninja.ai/52527831-f322-4678-8bfa-7662908f7165/c58b8a4b-d27d-40c4-a65e-b9736d6116a0_1.jpeg" alt="G5 Storm" class="bottom-left-img">
+  </div>
+
+  <script>
+    const cosmicContainer = document.getElementById('cosmicContainer');
+
+    // Function to create stars with different colors (white, orange, yellow)
+    function createStar(color) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.backgroundColor = color;
+      star.style.width = star.style.height = Math.random() * 3 + 1 + 'px'; // Random size
+      star.style.top = Math.random() * 100 + 'vh'; // Random vertical position
+      star.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+      star.style.animationDuration = Math.random() * 2 + 2 + 's'; // Random twinkle speed
+      cosmicContainer.appendChild(star);
+    }
+
+    // Function to create shooting stars
+    function createShootingStar() {
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.top = Math.random() * 50 + 'vh';
+      shootingStar.style.left = Math.random() * 100 + 'vw';
+      shootingStar.style.transform ='rotate(${Math.random() * 45 - 22.5}deg)'; // Random shooting angle
+      cosmicContainer.appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 1000);
+    }
+
+    // Function to create distant galaxies
+    function createGalaxy() {
+      const galaxy = document.createElement('div');
+      galaxy.className = 'galaxy';
+      galaxy.style.top = Math.random() * 100 + 'vh';
+      galaxy.style.left = Math.random() * 100 + 'vw';
+      galaxy.style.width = Math.random() * 100 + 50 + 'px'; // Random size
+      galaxy.style.height = galaxy.style.width;
+      galaxy.style.animationDuration = Math.random() * 50 + 30 + 's'; // Slow drift for galaxies
+      cosmicContainer.appendChild(galaxy);
+    }
+
+    // Generate stars equally divided into white, orange, and yellow
+    const starColors = ['white', 'orange', 'yellow'];
+    for (let i = 0; i < 300; i++) { // Number of stars
+      createStar(starColors[i % 3]);
+    }
+
+    // Shooting stars appear every 1.5 seconds
+    setInterval(createShootingStar, 1500);
+
+    // Galaxies appear every 7 seconds
+    setInterval(createGalaxy, 7000);
+  </script>
+</body>
+</html>

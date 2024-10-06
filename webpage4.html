@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subtle Star Clusters and Distant Galaxies</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Deep space background */
+    }
+
+    /* Cosmic container for all elements */
+    .cosmic-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(30, 30, 50, 0.6) 10%, rgba(10, 10, 25, 0.8) 40%, black 100%);
+      overflow: hidden;
+    }
+
+    /* Star Styles */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 4s infinite alternate;
+    }
+
+    /* Shooting Star Styles */
+    .shooting-star {
+      position: absolute;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+      animation: shoot 2s linear forwards;
+      border-radius: 50%;
+    }
+
+    /* Galaxy effect */
+    .galaxy {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0) 60%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      animation: drift 40s linear infinite;
+    }
+
+    /* Twinkling Animation for Stars */
+    @keyframes twinkle {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Shooting Star Animation */
+    @keyframes shoot {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-400px, 300px) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Drift animation for distant galaxies */
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(150vw, -50vh);
+      }
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: white; /* Text color */
+      margin-left: 20px;
+      font-size: 1.2em;
+      font-family: 'Courier New', Courier, monospace;
+      opacity: 0.8;
+    }
+    h2{
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: orangered; /* Text color */
+      margin-left: 500px;
+      margin-top: 50px;
+      font-size: 1.2em;
+      font-family: 'Courier New', Courier, monospace;
+      opacity: 0.8;
+    }
+    .top-right-img {
+      position:absolute;
+      top: 60px;
+      right: 0;
+      width: 400px;
+      height: auto;
+      margin-right: 100px;
+    }
+    
+
+  </style>
+</head>
+<body>
+  <div class="cosmic-container" id="cosmicContainer"></div>
+<h2>    Solar Flare:</h2><br>
+  <!-- Added text about geomagnetic storms -->
+    <pre>
+        A solar flare is a sudden, intense burst of radiation from the Sun’s surface,<br>
+        caused by the release of magnetic energy stored in the Sun’s atmosphere.<br>
+        These powerful eruptions occur near sunspots, which are<br>
+        areas with strong magnetic fields.<br>
+    </pre>
+    <img src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_256_0304.jpg" alt="Geomagnetic Storm" class="top-right-img">
+
+  </div>
+
+  <script>
+    const cosmicContainer = document.getElementById('cosmicContainer');
+
+    // Function to create stars with specified color
+    function createStar(color) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.backgroundColor = color;
+      star.style.width = Math.random() * 3 + 1 + 'px'; // Random small size
+      star.style.height = star.style.width;
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = Math.random() * 2 + 2 + 's'; // Twinkling speed
+      cosmicContainer.appendChild(star);
+    }
+
+    // Function to create medium-sized shooting stars
+    function createShootingStar() {
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.top = Math.random() * 100 + 'vh';
+      shootingStar.style.left = Math.random() * 100 + 'vw';
+      shootingStar.style.width = Math.random() * 50 + 30 + 'px'; // Medium width (30px to 80px)
+      shootingStar.style.height = Math.random() * 5 + 3 + 'px';  // Medium height (3px to 8px)
+      cosmicContainer.appendChild(shootingStar);
+      setTimeout(() => cosmicContainer.removeChild(shootingStar), 2000); // Remove after 2 seconds
+    }
+
+    // Function to create distant galaxy clusters
+    function createGalaxy() {
+      const galaxy = document.createElement('div');
+      galaxy.className = 'galaxy';
+      galaxy.style.top = Math.random() * 100 + 'vh';
+      galaxy.style.left = Math.random() * 100 + 'vw';
+      galaxy.style.width = Math.random() * 100 + 50 + 'px'; // Random size for galaxy
+      galaxy.style.height = galaxy.style.width;
+      galaxy.style.animationDuration = Math.random() * 50 + 30 + 's'; // Slow drift for galaxies
+      cosmicContainer.appendChild(galaxy);
+    }
+
+    // Generate stars equally divided into orange, white, and yellow
+    const starColors = ['orange', 'white', 'yellow'];
+    const totalStars = 150; // Total number of stars
+
+    for (let i = 0; i < totalStars; i++) {
+      createStar(starColors[i % 3]); // Cycle through orange, white, and yellow
+    }
+
+    // Generate more frequent shooting stars
+    setInterval(createShootingStar, 2000); // Shooting stars every 2 seconds
+
+    // Generate distant galaxy clusters
+    setInterval(createGalaxy, 15000); // Galaxies appearing every 15 seconds
+  </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Second Webpage</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    /* Container for dimmed content */
+    .content-container {
+      position: relative;
+      z-index: 5;
+      opacity: 0.8; /* Dimming effect */
+    }
+
+    h1 {
+      color: blue;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 3em;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: white;
+      margin-left: 20px;
+      font-size: 1em;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .top-right-img, .bottom-left-img {
+      position: absolute;
+      z-index: 6;
+      width: 250px;
+      height: auto;
+    }
+
+    .top-right-img { top: 100px; right: 180px; }
+    .bottom-left-img { bottom: 0px; left: 100px; }
+
+    /* Cosmic container with stars */
+    .cosmic-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10; /* Stars are above content */
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    .galaxy {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0) 60%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      animation: drift 40s linear infinite;
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, white, transparent);
+      animation: shoot 2s linear;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(600px) translateY(-350px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(100vw, 100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content-container">
+    <h1>About VIIRS</h1><br><br>
+    <pre>     WHAT IS VIIRS?<br><br>
+                  The Visible Infrared Imaging Radiometer Suite (VIIRS)<br>
+                  instrument collects visible and infrared images and<br>
+                  global observations of the land, atmosphere,<br>
+                  cryosphere and oceans.<br>
+    </pre>
+    <pre> 
+                                                                Currently flying on the Suomi NPP and NOAA-20<br>
+                                                                satellite missions, VIIRS instruments generate many<br>
+                                                                critical environmental products pertaining to snow<br>
+                                                                and ice cover, clouds, fog, aerosols, fire, smoke<br>
+                                                                plumes, dust, vegetation health, phytoplankton<br>
+                                                                abundance and chlorophyll.
+    </pre>
+
+    <!-- Image positioned at the top right -->
+    <img src="https://generated-assets.prod.myninja.ai/32c915ee-ebec-48d5-8129-3d3300c7177c/88d274e7-5443-4405-a698-ebe4fa489109_1.jpeg" alt="VIIRS Satellite" class="top-right-img">
+
+    <!-- Image positioned at the bottom left -->
+    <img src="https://generated-assets.prod.myninja.ai/32c915ee-ebec-48d5-8129-3d3300c7177c/4838e505-f889-4def-865b-cd105e76cea3_0.jpeg" alt="Earth from Space" class="bottom-left-img">
+  </div>
+
+  <div class="cosmic-container" id="cosmicContainer"></div>
+
+  <script>
+    const cosmicContainer = document.getElementById('cosmicContainer');
+
+    // Function to create stars with different colors (white, orange, yellow)
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star';
+
+      // Generate random size and color for the star
+      const size = Math.random() * 3 + 1 + 'px'; // Random size
+      star.style.width = size;
+      star.style.height = size;
+
+      // Generate a random color: white, orange, or yellow
+      const colors = ['white', 'orange', 'yellow'];
+      star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      cosmicContainer.appendChild(star);
+    }
+
+    function createShootingStar() {
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.top = Math.random() * 100 + 'vh';
+      shootingStar.style.left = Math.random() * 100 + 'vw';
+      cosmicContainer.appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 2000);
+    }
+
+    function createGalaxy() {
+      const galaxy = document.createElement('div');
+      galaxy.className = 'galaxy';
+      galaxy.style.top = Math.random() * 100 + 'vh';
+      galaxy.style.left = Math.random() * 100 + 'vw';
+      galaxy.style.width = Math.random() * 100 + 50 + 'px'; // Random size
+      galaxy.style.height = galaxy.style.width;
+      galaxy.style.animationDuration = Math.random() * 50 + 30 + 's'; // Slow drift for galaxies
+      cosmicContainer.appendChild(galaxy);
+    }
+
+    for (let i = 0; i < 300; i++) { // Changed to 300 stars
+      createStar();
+    }
+
+    setInterval(createShootingStar, 500);
+
+    for (let i = 0; i < 20; i++) {
+      createGalaxy();
+    }
+  </script>
+</body>
+</html>

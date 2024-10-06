@@ -44,4 +44,4 @@ Inspired by NASA’s ongoing research on solar storms and space weather, this pr
 Feel free to contribute to this project by submitting pull requests. We welcome improvements and additional features that help enhance public understanding of space weather.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/chaitra-raja/visual-representation-of-geomagnetic-storms-app/blob/main/LICENSE) file for details.
